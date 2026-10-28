@@ -1,0 +1,32 @@
+.match-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.match-ring svg {
+  transform: rotate(-90deg);
+}
+
+.match-ring-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.09);
+  stroke-width: 4;
+}
+
+.match-ring-progress {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+.match-ring-label {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}

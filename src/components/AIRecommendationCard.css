@@ -1,0 +1,60 @@
+.ai-card {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 44px;
+  overflow: hidden;
+}
+
+.ai-card-glow {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  background: var(--gradient-primary);
+  opacity: 0.16;
+  filter: blur(90px);
+  top: -120px;
+  right: -80px;
+  pointer-events: none;
+}
+
+.ai-card-head {
+  text-align: center;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.ai-card-head .section-title {
+  margin-bottom: 10px;
+}
+
+.ai-card-textarea {
+  font-size: 1rem;
+  min-height: 120px;
+  position: relative;
+}
+
+.ai-card-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.ai-card-suggestions .chip {
+  font-size: 0.8rem;
+  padding: 7px 14px;
+}
+
+.ai-card-submit {
+  width: 100%;
+  margin-top: 22px;
+  font-size: 1rem;
+  padding: 15px 26px;
+}
+
+@media (max-width: 640px) {
+  .ai-card {
+    padding: 28px 20px;
+  }
+}

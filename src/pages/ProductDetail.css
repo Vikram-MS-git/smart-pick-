@@ -1,0 +1,135 @@
+.detail-page {
+  padding: 40px 0 100px;
+}
+
+.detail-back {
+  display: inline-block;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  padding: 6px 0;
+}
+
+.detail-back:hover {
+  color: var(--accent-blue);
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 40px;
+  padding: 40px;
+}
+
+.detail-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px 0;
+}
+
+.detail-image {
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  border-radius: var(--radius-lg);
+  background: var(--gradient-radial), var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+}
+
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-name {
+  font-size: 1.8rem;
+}
+
+.detail-meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 4px 0 4px;
+}
+
+.detail-price {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.detail-rating {
+  color: var(--accent-warning);
+  font-size: 0.95rem;
+}
+
+.detail-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.detail-reason {
+  padding: 16px 18px;
+  margin: 6px 0 10px;
+}
+
+.detail-reason p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+.detail-specs-title {
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-top: 6px;
+}
+
+.detail-specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 20px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.detail-specs li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.detail-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.detail-notfound {
+  padding: 100px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+@media (max-width: 760px) {
+  .detail-layout {
+    grid-template-columns: 1fr;
+    padding: 26px 20px;
+  }
+  .detail-specs {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,126 @@
+.compare-page {
+  padding: 48px 0 100px;
+}
+
+.compare-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.compare-link {
+  color: var(--accent-blue);
+  text-decoration: underline;
+}
+
+.compare-table-wrap {
+  overflow-x: auto;
+  padding: 8px;
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+
+.compare-table th, .compare-table td {
+  padding: 16px 18px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.compare-table th:first-child, .compare-table td:first-child {
+  text-align: left;
+}
+
+.compare-row-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.compare-table td {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.compare-cell-best {
+  background: var(--accent-blue-soft);
+  color: var(--text-primary);
+  border-radius: 8px;
+}
+
+.compare-th-product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  position: relative;
+  padding-top: 6px;
+}
+
+.compare-th-emoji {
+  font-size: 1.6rem;
+}
+
+.compare-winner-tag {
+  background: rgba(255, 184, 79, 0.16);
+  color: var(--accent-warning);
+  border-color: rgba(255, 184, 79, 0.4);
+}
+
+.compare-remove {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  background: var(--bg-card);
+}
+
+.compare-remove:hover {
+  color: var(--accent-danger);
+  border-color: var(--accent-danger);
+}
+
+.compare-match-cell {
+  display: flex;
+  justify-content: center;
+}
+
+.winner-banner {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding: 26px 28px;
+  margin-top: 28px;
+}
+
+.winner-banner-icon {
+  font-size: 2.2rem;
+}
+
+.winner-banner h3 {
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  margin: 2px 0 6px;
+}
+
+.winner-banner p {
+  font-size: 0.88rem;
+}
+
+@media (max-width: 760px) {
+  .compare-slots {
+    grid-template-columns: 1fr;
+  }
+}
