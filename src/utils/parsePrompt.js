@@ -2,10 +2,12 @@
 // free-text hero prompt. This stands in for real NLP/AI parsing, which
 // can replace this function later without touching the calling page.
 
+// Order matters: Earphones must be checked before Mobile, because "earphones"
+// and "headphones" both contain the substring "phone".
 const categoryKeywords = {
   Laptop: ["laptop", "notebook"],
-  Mobile: ["mobile", "phone", "smartphone"],
   Earphones: ["earphone", "earbud", "headphone", "tws"],
+  Mobile: ["mobile", "phone", "smartphone"],
   PC: ["pc", "desktop", "build"],
 };
 

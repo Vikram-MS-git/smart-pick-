@@ -60,4 +60,4 @@ All "AI" and "data" logic is isolated behind plain functions and a single
 
 ## Tech stack
 
-React 19 + Vite, React Router DOM, plain CSS (no framework), mock data only.
+React 18 + Vite, React Router DOM, plain CSS (no framework), mock data only.

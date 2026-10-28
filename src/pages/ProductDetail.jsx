@@ -1,4 +1,4 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { getProductById } from "../data/products";
 import { useCompare } from "../context/CompareContext";
 import MatchRing from "../components/MatchRing";
@@ -7,8 +7,13 @@ import "./ProductDetail.css";
 export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const product = getProductById(id);
   const { isComparing, toggleCompare } = useCompare();
+
+  // location.key is "default" when this page was opened directly (shared link,
+  // new tab), where there is no in-app history to go back to.
+  const goBack = () => (location.key === "default" ? navigate("/") : navigate(-1));
 
   if (!product) {
     return (
@@ -25,7 +30,7 @@ export default function ProductDetail() {
   return (
     <div className="detail-page">
       <div className="container">
-        <button onClick={() => navigate(-1)} className="detail-back">
+        <button onClick={goBack} className="detail-back">
           ← Back
         </button>
 

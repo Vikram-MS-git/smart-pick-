@@ -23,7 +23,13 @@ export function generateRecommendations({ category, budget, usage, priority }) {
   });
 
   scored.sort((a, b) => b.computedMatch - a.computedMatch);
-  const top = scored.slice(0, Math.max(3, Math.min(6, scored.length)));
+
+  // Respect the budget: recommend only what the user can afford when at least
+  // three products fit it. Otherwise fall back to the full list so a very low
+  // budget still returns something instead of an empty result.
+  const affordable = scored.filter((p) => p.price <= numericBudget);
+  const candidates = affordable.length >= 3 ? affordable : scored;
+  const top = candidates.slice(0, Math.max(3, Math.min(6, candidates.length)));
 
   const bestOverall = [...top].sort((a, b) => b.computedMatch - a.computedMatch)[0];
   const bestValue = [...top].sort((a, b) => a.price - b.price)[0];

@@ -3,6 +3,10 @@ import { componentCatalog, componentLabels, componentOrder, checkCompatibility }
 import "./PCBuilder.css";
 
 const purposes = ["Gaming", "Coding", "Editing", "Office"];
+// Auto-fill order for "Generate Build". The motherboard goes first because it
+// decides which CPU socket and RAM type are valid. (The on-screen order in
+// componentOrder is unchanged.)
+const generationOrder = ["motherboard", ...componentOrder.filter((t) => t !== "motherboard")];
 const emptyBuild = { cpu: null, gpu: null, motherboard: null, ram: null, storage: null, psu: null, cabinet: null };
 
 const statusCopy = {
@@ -47,13 +51,18 @@ export default function PCBuilder() {
     // purpose while respecting the remaining budget where possible.
     setBuild((prev) => {
       const next = { ...prev };
-      componentOrder.forEach((type) => {
+      generationOrder.forEach((type) => {
         if (next[type]) return;
         const candidates = relevantParts(type).filter((p) => p.purpose?.includes(purpose));
-        const pick = candidates.find((p) => {
+        // Prefer parts the compatibility engine accepts alongside what is already chosen.
+        const compatible = candidates.filter(
+          (p) => checkCompatibility({ ...next, [type]: p }).status !== "incompatible"
+        );
+        const options = compatible.length > 0 ? compatible : candidates;
+        const pick = options.find((p) => {
           const spentSoFar = Object.values(next).reduce((s, x) => s + (x ? x.price : 0), 0);
           return spentSoFar + p.price <= budget;
-        }) || candidates[0] || componentCatalog[type][0];
+        }) || options[0] || componentCatalog[type][0];
         next[type] = pick;
       });
       return next;
@@ -204,7 +213,13 @@ export default function PCBuilder() {
               </div>
 
               {generated && compatibility.status !== "incompatible" && (
-                <p className="summary-note">✓ Build generated for {purpose} within your budget guidance.</p>
+                remaining >= 0 ? (
+                  <p className="summary-note">✓ Build generated for {purpose} within your budget guidance.</p>
+                ) : (
+                  <p className="summary-note" style={{ color: "var(--accent-warning)" }}>
+                    Build generated for {purpose}, but it is ₹{Math.abs(remaining).toLocaleString("en-IN")} over budget. Raise the budget or swap a part.
+                  </p>
+                )
               )}
             </div>
           </aside>

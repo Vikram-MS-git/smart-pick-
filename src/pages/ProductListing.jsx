@@ -15,8 +15,18 @@ const sortOptions = [
 export default function ProductListing({ icon, title, description, products, brands }) {
   const [query, setQuery] = useState("");
   const [brand, setBrand] = useState("All");
-  const [maxPrice, setMaxPrice] = useState(200000);
+  const [priceCap, setPriceCap] = useState(null); // null = nothing chosen yet, show everything
   const [sort, setSort] = useState("match");
+
+  // Slider bounds follow this category's real price range. (A fixed ₹5,000
+  // minimum made the filter useless for earphones, which start near ₹1,300.)
+  const allPrices = products.map((p) => p.price);
+  const lowest = allPrices.length ? Math.min(...allPrices) : 0;
+  const highest = allPrices.length ? Math.max(...allPrices) : 0;
+  const step = highest >= 50000 ? 5000 : 500;
+  const sliderMin = Math.floor(lowest / step) * step;
+  const sliderMax = Math.ceil(highest / step) * step;
+  const maxPrice = priceCap ?? sliderMax;
 
   const filtered = useMemo(() => {
     let list = products.filter((p) => p.price <= maxPrice);
@@ -69,11 +79,11 @@ export default function ProductListing({ icon, title, description, products, bra
               <label>Max Price: <span className="mono">₹{maxPrice.toLocaleString("en-IN")}</span></label>
               <input
                 type="range"
-                min="5000"
-                max="200000"
-                step="5000"
+                min={sliderMin}
+                max={sliderMax}
+                step={step}
                 value={maxPrice}
-                onChange={(e) => setMaxPrice(Number(e.target.value))}
+                onChange={(e) => setPriceCap(Number(e.target.value))}
                 className="builder-slider"
               />
             </div>

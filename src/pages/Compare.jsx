@@ -20,10 +20,10 @@ export default function Compare() {
   const [slots, setSlots] = useState([null, null, null]);
 
   useEffect(() => {
+    // Always mirror the shared selection, including when it becomes empty
+    // (otherwise "Clear selections" leaves stale products on screen).
     const fromContext = compareIds.map((id) => getProductById(id)).filter(Boolean);
-    if (fromContext.length > 0) {
-      setSlots([fromContext[0] || null, fromContext[1] || null, fromContext[2] || null]);
-    }
+    setSlots([fromContext[0] || null, fromContext[1] || null, fromContext[2] || null]);
   }, [compareIds]);
 
   const setSlot = (index, id) => {
@@ -73,7 +73,11 @@ export default function Compare() {
               >
                 <option value="">Select a product…</option>
                 {allProducts.map((p) => (
-                  <option key={p.id} value={p.id}>
+                  <option
+                    key={p.id}
+                    value={p.id}
+                    disabled={slots.some((s, j) => j !== i && s?.id === p.id)}
+                  >
                     {p.category} · {p.name}
                   </option>
                 ))}
